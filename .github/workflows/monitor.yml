@@ -1,0 +1,31 @@
+name: UPSDC Monitor
+
+on:
+  schedule:
+    - cron: "*/30 6-23 * * *"   # Every 30 min from 6AM to 11PM
+  workflow_dispatch:            # Allow manual run
+
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run monitor script
+        env:
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          ALERT_EMAIL: ${{ secrets.ALERT_EMAIL }}
+        run: node monitorPage.js
