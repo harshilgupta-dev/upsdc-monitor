@@ -21,7 +21,7 @@ async function monitor() {
     const status = response.status;
     const hasMessage = response.data.includes("ProcessClosedOpenShortly");
 
-    if (status !== 302 || !hasMessage) {
+    if (status !== 302 || hasMessage) {
       let msg = `ALERT!
 Status: ${status}
 ProcessClosedOpenShortly Found: ${hasMessage}`;
