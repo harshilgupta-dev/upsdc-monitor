@@ -2,8 +2,8 @@ name: UPSDC Monitor
 
 on:
   schedule:
-    - cron: "* * * * *"   # Every 30 min from 6AM to 11PM
-  workflow_dispatch:            # Allow manual run
+    - cron: "* * * * *"
+  workflow_dispatch:
 
 jobs:
   monitor:
